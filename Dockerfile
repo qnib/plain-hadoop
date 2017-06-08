@@ -1,18 +1,12 @@
-FROM qnib/alplain-openjdk8-glibc
+FROM qnib/alplain-jdk8
 
-ENV HADOOP_VER=2.7.3
-RUN apk add --no-cache curl bc jq nmap \
+ENV HADOOP_VER=2.7.3 \
+    ENTRYPOINTS_DIR=/opt/qnib/entry
+
+RUN apk add --no-cache curl bc jq nmap coreutils \
  && curl -fsL http://apache.claz.org/hadoop/common/hadoop-${HADOOP_VER}/hadoop-${HADOOP_VER}.tar.gz | tar xzf - -C /opt && mv /opt/hadoop-${HADOOP_VER} /opt/hadoop \
- && rm -rf /tmp/*
-ADD opt/hadoop/etc/hadoop/hadoop-env.sh \
-    opt/hadoop/etc/hadoop/mapred-site.xml \
-    /opt/hadoop/etc/hadoop/
-RUN adduser -D -s /bin/bash hadoop \
- && echo "/opt/hadoop/bin/hdfs getconf -namenodes" >> /root/.bash_history
-ADD etc/bashrc.hadoop /etc/
-
-RUN apk add --no-cache coreutils \
-## Use coreutils compiled on overlay-host, to allow df to work
-#ADD packages/ /tmp/packages/
-#RUN apk add --update --allow-untrusted /tmp/packages/coreutils-8.25-r0.apk \
-# && rm -rf /tmp/packages /var/cache/apk/*
+ && rm -rf /tmp/* \
+ && adduser -D -s /bin/bash hadoop
+COPY opt/qnib/entry/*.sh /opt/qnib/entry/
+COPY opt/qnib/hdfs/etc/*.xml /opt/qnib/hdfs/etc/
+COPY etc/bashrc.hadoop /etc/
