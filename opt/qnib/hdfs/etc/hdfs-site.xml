@@ -67,7 +67,7 @@
   </property>
   <property>
     <name>dfs.namenode.rpc-address</name>
-    <value>dfs://tasks.namenode:8020/</value>
+    <value>HDFS_NAMENODE_LIST</value>
   </property>
   <property>
     <name>dfs.replication</name>
