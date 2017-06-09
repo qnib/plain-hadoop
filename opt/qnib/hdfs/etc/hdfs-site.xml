@@ -75,6 +75,6 @@
   </property>
   <property>
     <name>dfs.name.dir</name>
-    <value>file:///data/hadoopdata/hdfs/namenode</value>
+    <value>file:///data/hadoop/data/hdfs/namenode</value>
   </property>
 </configuration>
