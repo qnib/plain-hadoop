@@ -19,7 +19,7 @@
 <configuration>
   <property>
     <name>fs.defaultFS</name>
-    <value>tasks.namenode:8020</value>
+    <value>HDFS_NAMENODE_LIST</value>
   </property>
   <property>
     <name>hadoop.security.authentication</name>
@@ -46,5 +46,10 @@
     <name>hadoop.proxyuser.hue.groups</name>
     <value>*</value>
   </property>
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/data/hadoop/tmp/</value>
+  </property>
+
   <!-- Hue WebHDFS proxy user setting -->
 </configuration>
